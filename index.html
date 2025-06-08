@@ -1,43 +1,84 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8" />
-  <title>نمایش استخر توکن USDT</title>
-  <style>
-    body {
-      font-family: Tahoma, sans-serif;
-      background: #f9f9f9;
-      text-align: center;
-      padding: 50px;
-    }
-    .pool {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      padding: 30px;
-      max-width: 400px;
-      margin: auto;
-    }
-    h1 {
-      color: #2c3e50;
-    }
-    .amount {
-      font-size: 3em;
-      color: #27ae60;
-      margin: 20px 0;
-    }
-    .token {
-      font-size: 2em;
-      color: #2980b9;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>استخر نقدینگی USDT</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #141517;
+    color: #fff;
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .pool-card {
+    background: #1e2128;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    width: 350px;
+    padding: 24px;
+    text-align: center;
+  }
+  .token-logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: #27ae60;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 32px;
+    color: white;
+    user-select: none;
+  }
+  .title {
+    font-size: 22px;
+    margin-bottom: 24px;
+  }
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #2f313a;
+    font-size: 18px;
+  }
+  .info-row:last-child {
+    border-bottom: none;
+  }
+  .label {
+    color: #b0b3b8;
+  }
+  .value {
+    font-weight: 600;
+  }
+  .price {
+    margin-top: 24px;
+    font-size: 20px;
+    color: #27ae60;
+    font-weight: bold;
+  }
+</style>
 </head>
 <body>
-  <div class="pool">
-    <h1>استخر نقدینگی توکن USDT</h1>
-    <div class="amount">12,000</div>
-    <div class="token">USDT</div>
-    <p>قیمت هر توکن: 1 دلار</p>
+  <div class="pool-card">
+    <div class="token-logo">USDT</div>
+    <div class="title">استخر نقدینگی توکن</div>
+    <div class="info-row">
+      <div class="label">موجودی توکن:</div>
+      <div class="value">12,000</div>
+    </div>
+    <div class="info-row">
+      <div class="label">نام توکن:</div>
+      <div class="value">USDT</div>
+    </div>
+    <div class="price">قیمت توکن: 1.00 دلار</div>
   </div>
 </body>
 </html>
