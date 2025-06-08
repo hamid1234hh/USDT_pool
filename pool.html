@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <title>نمایش ثابت استخر نقدینگی</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background-color: #f4f4f4; direction: rtl; }
+    #login { max-width: 300px; margin: auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    #pool { display: none; text-align: center; background: #fff; padding: 20px; max-width: 400px; margin: auto; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input { width: 100%; padding: 8px; margin: 8px 0; border-radius: 8px; border: 1px solid #ccc; }
+    button { padding: 10px; width: 100%; background-color: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer; }
+    button:hover { background-color: #45a049; }
+  </style>
+</head>
+<body>
+  <div id="login">
+    <h2>ورود به نمایش ثابت استخر نقدینگی</h2>
+    <input type="text" id="username" placeholder="نام کاربری" />
+    <input type="password" id="password" placeholder="رمز عبور" />
+    <button onclick="login()">ورود</button>
+    <p id="error" style="color:red;"></p>
+  </div>
+
+  <div id="pool">
+    <h2>نمایش ثابت استخر نقدینگی</h2>
+    <p>نام توکن: <b>USDT</b></p>
+    <p>موجودی توکن: <b>12,000</b></p>
+    <p>قیمت توکن: <b>1.00 دلار</b></p>
+  </div>
+
+  <script>
+    const USERNAME = "admin";
+    const PASSWORD = "1234";
+
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      const error = document.getElementById("error");
+      if(user === USERNAME && pass === PASSWORD) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("pool").style.display = "block";
+      } else {
+        error.textContent = "نام کاربری یا رمز عبور اشتباه است!";
+      }
+    }
+  </script>
+</body>
+</html>
