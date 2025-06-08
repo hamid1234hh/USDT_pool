@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>USDT Liquidity Pool</title>
+<title>USDT Liquidity Pool - Login</title>
 <style>
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,13 +16,47 @@
     align-items: center;
     height: 100vh;
   }
-  .pool-card {
+  #content {
+    display: none;
+    text-align: center;
     background: #1e2128;
+    padding: 24px;
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.6);
     width: 350px;
-    padding: 24px;
+  }
+  #login {
     text-align: center;
+    background: #1e2128;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    width: 350px;
+  }
+  input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+  }
+  button {
+    padding: 10px 40px;
+    border: none;
+    border-radius: 8px;
+    background: #27ae60;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #219150;
+  }
+  #error {
+    color: #e74c3c;
+    margin-top: 10px;
   }
   .token-logo {
     width: 60px;
@@ -67,18 +101,45 @@
 </style>
 </head>
 <body>
-  <div class="pool-card">
-    <div class="token-logo">USDT</div>
-    <div class="title">Liquidity Pool Token</div>
-    <div class="info-row">
-      <div class="label">Token Balance:</div>
-      <div class="value">12,000</div>
-    </div>
-    <div class="info-row">
-      <div class="label">Token Name:</div>
-      <div class="value">USDT</div>
-    </div>
-    <div class="price">Token Price: $1.00</div>
+
+<div id="login">
+  <h2>Login to USDT Liquidity Pool</h2>
+  <input type="text" id="username" placeholder="Username" />
+  <br/>
+  <input type="password" id="password" placeholder="Password" />
+  <br/>
+  <button onclick="checkLogin()">Login</button>
+  <p id="error"></p>
+</div>
+
+<div id="content">
+  <div class="token-logo">USDT</div>
+  <div class="title">Liquidity Pool Token</div>
+  <div class="info-row">
+    <div class="label">Token Balance:</div>
+    <div class="value">12,000</div>
   </div>
+  <div class="info-row">
+    <div class="label">Token Name:</div>
+    <div class="value">USDT</div>
+  </div>
+  <div class="price">Token Price: $1.00</div>
+</div>
+
+<script>
+  function checkLogin() {
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+    const error = document.getElementById('error');
+    if(user === 'admin' && pass === '1234') {
+      document.getElementById('login').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
+      error.textContent = '';
+    } else {
+      error.textContent = 'Incorrect username or password!';
+    }
+  }
+</script>
+
 </body>
 </html>
