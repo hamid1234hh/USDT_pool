@@ -90,92 +90,92 @@
   <div style="text-align: center; margin-bottom: 10px;">
     <img src="USDT_logo.png" alt="USDT Logo" style="width: 80px;" />
   </div>
-  <div class="tabs">
-    <div class="tab active" onclick="showTab('overview')">Overview</div>
-    <div class="tab" onclick="showTab('pool')">Pool</div>
-    <div class="tab" onclick="showTab('stats')">Stats</div>
-    <div class="tab" onclick="showTab('deposit')">Deposit</div>
-    <div class="tab" onclick="showTab('withdraw')">Withdraw</div>
-  </div>
-
-  <div id="overview" class="content">
-    <h2>Overview</h2>
-    <div class="card">
-      <p><strong>Token:</strong> USDT</p>
-      <p><strong>Total Supply in Pool:</strong> 12,750 USDT</p>
-      <p><strong>Token Price:</strong> 1.00 USD</p>
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('overview')">Overview</div>
+      <div class="tab" onclick="showTab('pool')">Pool</div>
+      <div class="tab" onclick="showTab('stats')">Stats</div>
+      <div class="tab" onclick="showTab('deposit')">Deposit</div>
+      <div class="tab" onclick="showTab('withdraw')">Withdraw</div>
     </div>
-  </div>
 
-  <div id="pool" class="content" style="display:none;">
-    <h2>Liquidity Pool</h2>
-    <div class="card">
-      <p><strong>USDT / BUSD</strong></p>
-      <p>Liquidity: 12,750 USDT</p>
-      <p>Current Price: 1.00 USD</p>
+    <div id="overview" class="content">
+      <h2>Overview</h2>
+      <div class="card">
+        <p><strong>Token:</strong> USDT</p>
+        <p><strong>Total Supply in Pool:</strong> 12,750 USDT</p>
+        <p><strong>Token Price:</strong> 1.00 USD</p>
+      </div>
     </div>
-  </div>
 
-  <div id="stats" class="content" style="display:none;">
-    <h2>Analytics</h2>
-    <div class="card">
-      <p>Liquidity Chart (Simulated)</p>
-      <canvas id="liquidityChart" width="400" height="200"></canvas>
+    <div id="pool" class="content" style="display:none;">
+      <h2>Liquidity Pool</h2>
+      <div class="card">
+        <p><strong>USDT / BUSD</strong></p>
+        <p>Liquidity: 12,750 USDT</p>
+        <p>Current Price: 1.00 USD</p>
+      </div>
     </div>
-  </div>
 
-  <div id="deposit" class="content" style="display:none;">
-    <h2>Deposit</h2>
-    <div class="card">
-      <p><strong>Wallet Address:</strong></p>
-      <p style="word-break: break-all;">0x1234567890abcdef1234567890abcdef12345678</p>
-      <p>Send only USDT to this address.</p>
+    <div id="stats" class="content" style="display:none;">
+      <h2>Analytics</h2>
+      <div class="card">
+        <p>Liquidity Chart (Simulated)</p>
+        <canvas id="liquidityChart" width="400" height="200"></canvas>
+      </div>
     </div>
-  </div>
+
+    <div id="deposit" class="content" style="display:none;">
+      <h2>Deposit</h2>
+      <div class="card">
+        <p><strong>Wallet Address:</strong></p>
+        <p style="word-break: break-all;">0x1234567890abcdef1234567890abcdef12345678</p>
+        <p>Send only USDT (BEP20) to this address.</p>
+      </div>
+    </div>
 
   <div id="withdraw" class="content" style="display:none;">
-    <h2>Withdraw</h2>
-    <div class="card">
-      <p><strong>Enter your withdrawal address:</strong></p>
-      <input type="text" placeholder="0x..." style="width: 100%; padding: 10px; border-radius: 6px; border: none; margin-bottom: 10px;" />
-      <button style="padding: 10px 20px; border: none; border-radius: 6px; background-color: #00d1b2; color: #1e1e2f; font-weight: bold; cursor: pointer;">Submit</button>
-    </div>
+  <h2>Withdraw</h2>
+  <div class="card">
+    <p><strong>Enter your withdrawal address:</strong></p>
+    <input type="text" placeholder="0x..." style="width: 100%; padding: 10px; border-radius: 6px; border: none; margin-bottom: 10px;" />
+    <button style="padding: 10px 20px; border: none; border-radius: 6px; background-color: #00d1b2; color: #1e1e2f; font-weight: bold; cursor: pointer;">Submit</button>
   </div>
 </div>
+ </div>
 
-<script>
-  function showTab(id) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
-    document.getElementById(id).style.display = 'block';
-    event.target.classList.add('active');
-  }
+  <script>
+    function showTab(id) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+      event.target.classList.add('active');
+    }
 
-  const ctx = document.getElementById('liquidityChart');
-  if (ctx) {
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
-        datasets: [{
-          label: 'Liquidity (USDT)',
-          data: [12000, 11950, 12030, 11980, 12000],
-          backgroundColor: 'rgba(0, 209, 178, 0.2)',
-          borderColor: '#00d1b2',
-          borderWidth: 2,
-          tension: 0.3,
-          fill: true
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: false
+    const ctx = document.getElementById('liquidityChart');
+    if (ctx) {
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
+          datasets: [{
+            label: 'Liquidity (USDT)',
+            data: [12000, 11950, 12030, 11980, 12000],
+            backgroundColor: 'rgba(0, 209, 178, 0.2)',
+            borderColor: '#00d1b2',
+            borderWidth: 2,
+            tension: 0.3,
+            fill: true
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: false
+            }
           }
         }
-      }
-    });
-  }
-</script>
+      });
+    }
+  </script>
 </body>
 </html>
