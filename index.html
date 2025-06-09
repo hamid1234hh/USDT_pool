@@ -40,6 +40,7 @@
       color: #ccc;
       text-decoration: none;
       transition: 0.3s;
+      cursor: pointer;
     }
     .sidebar a:hover {
       background-color: #2f2f44;
@@ -141,7 +142,7 @@
       <a href="#">Analytics</a>
       <a href="#">Deposit</a>
       <a href="#">Withdraw</a>
-      <a href="#">Settings</a>
+      <a href="#" onclick="logout()">Logout</a>
     </div>
 
     <div class="main">
@@ -214,6 +215,14 @@
       }
     }
 
+    function logout() {
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("loginContainer").style.display = "flex";
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+      document.getElementById("loginError").style.display = "none";
+    }
+
     function showTab(id) {
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
@@ -247,14 +256,6 @@
           }
         });
       }
-
-      // Add event listener for Enter key on login inputs
-      document.getElementById("username").addEventListener("keydown", function(e) {
-        if (e.key === "Enter") login();
-      });
-      document.getElementById("password").addEventListener("keydown", function(e) {
-        if (e.key === "Enter") login();
-      });
     }
   </script>
 </body>
