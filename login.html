@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login - USDT Pool</title>
   <style>
     body {
@@ -61,8 +61,10 @@
       const password = document.getElementById("password").value.trim();
 
       if (username === "DexDeveloper" && password === "ai654321") {
-        window.location.href = "index.html";
+        console.log("Login successful, redirecting...");
+        window.location.href = "https://hamid1234hh.github.io/USDT_pool/index.html";
       } else {
+        console.log("Login failed");
         document.getElementById("error-msg").style.display = "block";
       }
     }
