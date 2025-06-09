@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>USDT Pool Dashboard with Login</title>
+  <title>USDT Pool Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
@@ -11,71 +11,15 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: #1e1e2f;
       color: #ffffff;
-      min-height: 100vh;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      height: 100vh;
     }
-    #login-container, #dashboard {
-      background-color: #2e2e45;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      width: 350px;
-    }
-    #dashboard {
-      display: none;
-      width: 100%;
-      max-width: 1200px;
-      display: flex;
-      height: 90vh;
-      border-radius: 0;
-      box-shadow: none;
-      background-color: transparent;
-      color: white;
-    }
-
-    /* Login styles */
-    #login-container h2 {
-      margin-bottom: 20px;
-      text-align: center;
-      color: #00d1b2;
-    }
-    #login-container input {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 6px;
-      border: none;
-      font-size: 16px;
-    }
-    #login-container button {
-      width: 100%;
-      padding: 12px;
-      border-radius: 6px;
-      border: none;
-      background-color: #00d1b2;
-      color: #1e1e2f;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    #error-msg {
-      color: #ff6b6b;
-      margin-top: 10px;
-      display: none;
-      text-align: center;
-    }
-
-    /* Sidebar */
     .sidebar {
       width: 220px;
       background-color: #252539;
       height: 100vh;
       padding-top: 30px;
       box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-      flex-shrink: 0;
     }
     .sidebar h2 {
       color: #00d1b2;
@@ -94,8 +38,6 @@
       background-color: #2f2f44;
       color: #00d1b2;
     }
-
-    /* Main content */
     .main {
       flex: 1;
       padding: 20px;
@@ -148,136 +90,87 @@
 </head>
 <body>
 
-  <!-- Login container -->
-  <div id="login-container">
-    <h2>USDT Pool Login</h2>
-    <input type="text" id="username" placeholder="Username" />
-    <input type="password" id="password" placeholder="Password" />
-    <button onclick="login()">Login</button>
-    <div id="error-msg">Incorrect username or password</div>
+  <div class="sidebar">
+    <h2>USDT Pool</h2>
+    <a href="#" onclick="showTab('overview')">Overview</a>
+    <a href="#" onclick="showTab('pool')">Liquidity</a>
+    <a href="#" onclick="showTab('swap')">Swap</a>
+    <a href="#" onclick="showTab('analytics')">Analytics</a>
+    <a href="#" onclick="showTab('deposit')">Deposit</a>
+    <a href="#" onclick="showTab('withdraw')">Withdraw</a>
   </div>
 
-  <!-- Dashboard container -->
-  <div id="dashboard">
-    <div class="sidebar">
-      <h2>USDT Pool</h2>
-      <a href="#" onclick="showTab('overview')">Overview</a>
-      <a href="#" onclick="showTab('pool')">Liquidity</a>
-      <a href="#" onclick="showTab('swap')">Swap</a>
-      <a href="#" onclick="showTab('analytics')">Analytics</a>
-      <a href="#" onclick="showTab('deposit')">Deposit</a>
-      <a href="#" onclick="showTab('withdraw')">Withdraw</a>
-      <a href="#" onclick="logout()">Logout</a>
+  <div class="main">
+    <img src="USDT_logo.png" alt="USDT Logo" class="logo" />
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('overview')">Overview</div>
+      <div class="tab" onclick="showTab('pool')">Pool</div>
+      <div class="tab" onclick="showTab('analytics')">Analytics</div>
+      <div class="tab" onclick="showTab('deposit')">Deposit</div>
+      <div class="tab" onclick="showTab('withdraw')">Withdraw</div>
     </div>
 
-    <div class="main">
-      <img src="USDT_logo.png" alt="USDT Logo" class="logo" />
-      <div class="tabs">
-        <div class="tab active" onclick="showTab('overview')">Overview</div>
-        <div class="tab" onclick="showTab('pool')">Pool</div>
-        <div class="tab" onclick="showTab('analytics')">Analytics</div>
-        <div class="tab" onclick="showTab('deposit')">Deposit</div>
-        <div class="tab" onclick="showTab('withdraw')">Withdraw</div>
+    <div id="overview" class="content">
+      <h2>Overview</h2>
+      <div class="card">
+        <p><strong>Token:</strong> USDT</p>
+        <p><strong>Total Supply in Pool:</strong> 12,750 USDT</p>
+        <p><strong>Token Price:</strong> 1.00 USD</p>
       </div>
+    </div>
 
-      <div id="overview" class="content">
-        <h2>Overview</h2>
-        <div class="card">
-          <p><strong>Token:</strong> USDT</p>
-          <p><strong>Total Supply in Pool:</strong> 12,750 USDT</p>
-          <p><strong>Token Price:</strong> 1.00 USD</p>
-        </div>
+    <div id="pool" class="content" style="display:none;">
+      <h2>Liquidity Pool</h2>
+      <div class="card">
+        <p><strong>USDT / BUSD</strong></p>
+        <p>Liquidity: 12,750 USDT</p>
+        <p>Current Price: 1.00 USD</p>
       </div>
+    </div>
 
-      <div id="pool" class="content" style="display:none;">
-        <h2>Liquidity Pool</h2>
-        <div class="card">
-          <p><strong>USDT / BUSD</strong></p>
-          <p>Liquidity: 12,750 USDT</p>
-          <p>Current Price: 1.00 USD</p>
-        </div>
+    <div id="swap" class="content" style="display:none;">
+      <h2>Swap</h2>
+      <div class="card">
+        <p>Swap functionality coming soon...</p>
       </div>
+    </div>
 
-      <div id="swap" class="content" style="display:none;">
-        <h2>Swap</h2>
-        <div class="card">
-          <p>Swap functionality coming soon...</p>
-        </div>
+    <div id="analytics" class="content" style="display:none;">
+      <h2>Analytics</h2>
+      <div class="card">
+        <p>Liquidity Chart (Simulated)</p>
+        <canvas id="liquidityChart" width="400" height="200"></canvas>
       </div>
+    </div>
 
-      <div id="analytics" class="content" style="display:none;">
-        <h2>Analytics</h2>
-        <div class="card">
-          <p>Liquidity Chart (Simulated)</p>
-          <canvas id="liquidityChart" width="400" height="200"></canvas>
-        </div>
+    <div id="deposit" class="content" style="display:none;">
+      <h2>Deposit</h2>
+      <div class="card">
+        <p><strong>Wallet Address:</strong></p>
+        <p style="word-break: break-all;">0x1234567890abcdef1234567890abcdef12345678</p>
+        <p>Send only USDT (BEP20) to this address.</p>
       </div>
+    </div>
 
-      <div id="deposit" class="content" style="display:none;">
-        <h2>Deposit</h2>
-        <div class="card">
-          <p><strong>Wallet Address:</strong></p>
-          <p style="word-break: break-all;">0x1234567890abcdef1234567890abcdef12345678</p>
-          <p>Send only USDT (BEP20) to this address.</p>
-        </div>
-      </div>
-
-      <div id="withdraw" class="content" style="display:none;">
-        <h2>Withdraw</h2>
-        <div class="card">
-          <p><strong>Enter your withdrawal address:</strong></p>
-          <input type="text" placeholder="0x..." style="width: 100%; padding: 10px; border-radius: 6px; border: none; margin-bottom: 10px;" />
-          <button style="padding: 10px 20px; border: none; border-radius: 6px; background-color: #00d1b2; color: #1e1e2f; font-weight: bold; cursor: pointer;">Submit</button>
-        </div>
+    <div id="withdraw" class="content" style="display:none;">
+      <h2>Withdraw</h2>
+      <div class="card">
+        <p><strong>Enter your withdrawal address:</strong></p>
+        <input type="text" placeholder="0x..." style="width: 100%; padding: 10px; border-radius: 6px; border: none; margin-bottom: 10px;" />
+        <button style="padding: 10px 20px; border: none; border-radius: 6px; background-color: #00d1b2; color: #1e1e2f; font-weight: bold; cursor: pointer;">Submit</button>
       </div>
     </div>
   </div>
 
 <script>
-  // Login credentials
-  const validUsername = "DexDeveloper";
-  const validPassword = "ai654321";
-
-  function login() {
-    const usernameInput = document.getElementById("username").value.trim();
-    const passwordInput = document.getElementById("password").value.trim();
-    const errorMsg = document.getElementById("error-msg");
-
-    if (usernameInput === validUsername && passwordInput === validPassword) {
-      errorMsg.style.display = "none";
-      document.getElementById("login-container").style.display = "none";
-      document.getElementById("dashboard").style.display = "flex";
-      showTab('overview');
-    } else {
-      errorMsg.style.display = "block";
-    }
-  }
-
-  function logout() {
-    document.getElementById("login-container").style.display = "block";
-    document.getElementById("dashboard").style.display = "none";
-    document.getElementById("username").value = "";
-    document.getElementById("password").value = "";
-    document.getElementById("error-msg").style.display = "none";
-  }
-
   function showTab(id) {
-    // remove active from all tabs
-    document.querySelectorAll('.tab').forEach(tab => {
-      tab.classList.remove('active');
-    });
-    // hide all content
-    document.querySelectorAll('.content').forEach(content => {
-      content.style.display = 'none';
-    });
-    // show selected content
-    const selectedContent = document.getElementById(id);
-    if (selectedContent) selectedContent.style.display = 'block';
+    document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.content').forEach(content => content.style.display = 'none');
+    const selected = document.getElementById(id);
+    if(selected) selected.style.display = 'block';
 
-    // mark tab active
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => {
-      if (tab.textContent.toLowerCase() === id.toLowerCase()) {
+    document.querySelectorAll('.tab').forEach(tab => {
+      if(tab.textContent.toLowerCase() === id.toLowerCase()) {
         tab.classList.add('active');
       }
     });
