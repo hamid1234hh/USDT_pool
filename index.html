@@ -5,11 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>USDT Pool Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    if (localStorage.getItem('loggedIn') !== 'true') {
-      window.location.href = 'login.html';
-    }
-  </script>
   <style>
     body {
       margin: 0;
@@ -91,10 +86,10 @@
     <a href="#">Withdraw</a>
     <a href="#">Settings</a>
   </div>
-  <div class="main">
-    <div style="text-align: center; margin-bottom: 10px;">
-      <img src="USDT_logo.png" alt="USDT Logo" style="width: 80px;" />
-    </div>
+<div class="main">
+  <div style="text-align: center; margin-bottom: 10px;">
+    <img src="USDT_logo.png" alt="USDT Logo" style="width: 80px;" />
+  </div>
     <div class="tabs">
       <div class="tab active" onclick="showTab('overview')">Overview</div>
       <div class="tab" onclick="showTab('pool')">Pool</div>
@@ -134,19 +129,19 @@
       <div class="card">
         <p><strong>Wallet Address:</strong></p>
         <p style="word-break: break-all;">0x1234567890abcdef1234567890abcdef12345678</p>
-        <p>Send only USDT <strong>(BEP20)</strong> to this address.</p>
+        <p>Send only USDT (BEP20) to this address.</p>
       </div>
     </div>
 
-    <div id="withdraw" class="content" style="display:none;">
-      <h2>Withdraw</h2>
-      <div class="card">
-        <p><strong>Enter your withdrawal address:</strong></p>
-        <input type="text" placeholder="0x..." style="width: 100%; padding: 10px; border-radius: 6px; border: none; margin-bottom: 10px;" />
-        <button style="padding: 10px 20px; border: none; border-radius: 6px; background-color: #00d1b2; color: #1e1e2f; font-weight: bold; cursor: pointer;">Submit</button>
-      </div>
-    </div>
+  <div id="withdraw" class="content" style="display:none;">
+  <h2>Withdraw</h2>
+  <div class="card">
+    <p><strong>Enter your withdrawal address:</strong></p>
+    <input type="text" placeholder="0x..." style="width: 100%; padding: 10px; border-radius: 6px; border: none; margin-bottom: 10px;" />
+    <button style="padding: 10px 20px; border: none; border-radius: 6px; background-color: #00d1b2; color: #1e1e2f; font-weight: bold; cursor: pointer;">Submit</button>
   </div>
+</div>
+ </div>
 
   <script>
     function showTab(id) {
