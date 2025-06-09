@@ -142,7 +142,8 @@
       <a href="#">Analytics</a>
       <a href="#">Deposit</a>
       <a href="#">Withdraw</a>
-      <a href="#" onclick="logout()">Logout</a>
+      <a href="#">Settings</a>
+      <a onclick="logout()">Logout</a>
     </div>
 
     <div class="main">
@@ -210,6 +211,7 @@
       if (username === "DexDeveloper" && password === "ai654321") {
         document.getElementById("loginContainer").style.display = "none";
         document.getElementById("dashboard").style.display = "flex";
+        document.getElementById("loginError").style.display = "none";
       } else {
         document.getElementById("loginError").style.display = "block";
       }
@@ -256,6 +258,14 @@
           }
         });
       }
+
+      // Add event listener for Enter key on login inputs
+      document.getElementById("username").addEventListener("keydown", function(e) {
+        if (e.key === "Enter") login();
+      });
+      document.getElementById("password").addEventListener("keydown", function(e) {
+        if (e.key === "Enter") login();
+      });
     }
   </script>
 </body>
