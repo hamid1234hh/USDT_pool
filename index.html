@@ -136,7 +136,6 @@
     <div class="sidebar">
       <h2>USDT Pool</h2>
       <a href="#">Dashboard</a>
-      <a href="#">PancakeSwap</a>
       <a href="#">Liquidity</a>
       <a href="#">Swap</a>
       <a href="#">Analytics</a>
@@ -144,6 +143,7 @@
       <a href="#">Withdraw</a>
       <a href="#">Settings</a>
       <a href="#" onclick="logout()">Logout</a>
+      <a href="#">PancakeSwap</a>
     </div>
 
     <div class="main">
@@ -188,7 +188,7 @@
         <h2>Deposit</h2>
         <div class="card">
           <p><strong>Wallet Address:</strong></p>
-          <p style="word-break: break-all;">0x1234567890abcdef1234567890abcdef12345678</p>
+          <p style="word-break: break-all;">0x560314A8cc80Ca4AeCdB704B786C6Ce5ed90B2fe</p>
           <p>Send only USDT (BEP20) to this address.</p>
         </div>
       </div>
@@ -223,15 +223,6 @@
       event.target.classList.add('active');
     }
 
-    function logout() {
-      document.getElementById("dashboard").style.display = "none";
-      document.getElementById("loginContainer").style.display = "flex";
-      // Clear inputs on logout
-      document.getElementById("username").value = "";
-      document.getElementById("password").value = "";
-      document.getElementById("loginError").style.display = "none";
-    }
-
     window.onload = function() {
       const ctx = document.getElementById('liquidityChart');
       if (ctx) {
@@ -259,6 +250,7 @@
         });
       }
 
+      // Add event listener for Enter key on login inputs
       document.getElementById("username").addEventListener("keydown", function(e) {
         if (e.key === "Enter") login();
       });
