@@ -11,7 +11,35 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: #1e1e2f;
       color: #ffffff;
+    }
+    #loginContainer, #dashboard {
+      display: none;
+    }
+    #loginContainer.active, #dashboard.active {
       display: flex;
+    }
+    #loginContainer {
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    input {
+      padding: 10px;
+      margin: 8px 0;
+      width: 250px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #00d1b2;
+      border: none;
+      border-radius: 6px;
+      color: #1e1e2f;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
     }
     .sidebar {
       width: 220px;
@@ -73,9 +101,22 @@
       border-radius: 10px;
       padding: 10px;
     }
+    .container {
+      display: flex;
+    }
   </style>
 </head>
 <body>
+
+<div id="loginContainer" class="active">
+  <h2>Login to USDT Pool</h2>
+  <input type="text" id="username" placeholder="Username" />
+  <input type="password" id="password" placeholder="Password" />
+  <button onclick="login()">Login</button>
+  <p id="loginError" style="color: red; display: none;">Invalid username or password</p>
+</div>
+
+<div id="dashboard" class="container">
   <div class="sidebar">
     <h2>USDT Pool</h2>
     <a href="#">Dashboard</a>
@@ -86,10 +127,10 @@
     <a href="#">Withdraw</a>
     <a href="#">Settings</a>
   </div>
-<div class="main">
-  <div style="text-align: center; margin-bottom: 10px;">
-    <img src="USDT_logo.png" alt="USDT Logo" style="width: 80px;" />
-  </div>
+  <div class="main">
+    <div style="text-align: center; margin-bottom: 10px;">
+      <img src="USDT_logo.png" alt="USDT Logo" style="width: 80px;" />
+    </div>
     <div class="tabs">
       <div class="tab active" onclick="showTab('overview')">Overview</div>
       <div class="tab" onclick="showTab('pool')">Pool</div>
@@ -133,24 +174,38 @@
       </div>
     </div>
 
-  <div id="withdraw" class="content" style="display:none;">
-  <h2>Withdraw</h2>
-  <div class="card">
-    <p><strong>Enter your withdrawal address:</strong></p>
-    <input type="text" placeholder="0x..." style="width: 100%; padding: 10px; border-radius: 6px; border: none; margin-bottom: 10px;" />
-    <button style="padding: 10px 20px; border: none; border-radius: 6px; background-color: #00d1b2; color: #1e1e2f; font-weight: bold; cursor: pointer;">Submit</button>
+    <div id="withdraw" class="content" style="display:none;">
+      <h2>Withdraw</h2>
+      <div class="card">
+        <p><strong>Enter your withdrawal address:</strong></p>
+        <input type="text" placeholder="0x..." style="width: 100%; padding: 10px; border-radius: 6px; border: none; margin-bottom: 10px;" />
+        <button style="padding: 10px 20px; border: none; border-radius: 6px; background-color: #00d1b2; color: #1e1e2f; font-weight: bold; cursor: pointer;">Submit</button>
+      </div>
+    </div>
   </div>
 </div>
- </div>
 
-  <script>
-    function showTab(id) {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-      event.target.classList.add('active');
+<script>
+  function login() {
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+    if (user === 'DexDeveloper' && pass === 'ai654321') {
+      document.getElementById('loginContainer').classList.remove('active');
+      document.getElementById('dashboard').classList.add('active');
+    } else {
+      document.getElementById('loginError').style.display = 'block';
     }
+  }
 
+  function showTab(id) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+    event.target.classList.add('active');
+  }
+
+  // Chart initialization
+  window.onload = () => {
     const ctx = document.getElementById('liquidityChart');
     if (ctx) {
       new Chart(ctx, {
@@ -176,6 +231,7 @@
         }
       });
     }
-  </script>
+  };
+</script>
 </body>
 </html>
