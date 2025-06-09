@@ -3,24 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>USDT Pool Dashboard</title>
+  <title>USDT Pool Dashboard - Login</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #1e1e2f;
       color: #ffffff;
-    }
-    #loginContainer {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
-    #dashboard {
+    #loginContainer {
+      background-color: #2e2e45;
+      padding: 40px 50px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 209, 178, 0.5);
+      width: 320px;
+      text-align: center;
+    }
+    #loginContainer h2 {
+      color: #00d1b2;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 12px 0 20px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+    }
+    input[type="text"]:focus, input[type="password"]:focus {
+      box-shadow: 0 0 8px #00d1b2;
+      background-color: #3a3a55;
+      color: #fff;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background-color: #00d1b2;
+      color: #1e1e2f;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #00b090;
+    }
+    #loginError {
+      color: #ff4c4c;
+      margin-top: 10px;
+      font-weight: 600;
       display: none;
-      flex-direction: row;
+    }
+    /* Hide main content initially */
+    #mainContent {
+      display: none;
+      flex: 1;
+      padding: 20px;
+      font-family: 'Segoe UI', sans-serif;
     }
     .sidebar {
       width: 220px;
@@ -28,6 +77,10 @@
       height: 100vh;
       padding-top: 30px;
       box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+      float: left;
+      position: fixed;
+      top: 0;
+      left: 0;
     }
     .sidebar h2 {
       color: #00d1b2;
@@ -44,10 +97,6 @@
     .sidebar a:hover {
       background-color: #2f2f44;
       color: #00d1b2;
-    }
-    .main {
-      flex: 1;
-      padding: 20px;
     }
     .tabs {
       display: flex;
@@ -85,54 +134,15 @@
   </style>
 </head>
 <body>
-
-  <!-- Login Page -->
   <div id="loginContainer">
-    <div style="
-      background-color: #2e2e45;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(0, 209, 178, 0.2);
-      text-align: center;
-      width: 320px;
-    ">
-      <img src="USDT_logo.png" alt="Logo" style="width: 60px; margin-bottom: 20px;" />
-      <h2 style="color: #00d1b2; margin-bottom: 20px;">Welcome to USDT Pool</h2>
-      <input type="text" id="username" placeholder="Username" style="
-        background-color: #1e1e2f;
-        color: #fff;
-        border: 1px solid #444;
-        margin-bottom: 15px;
-        padding: 12px;
-        width: 100%;
-        border-radius: 6px;
-      " />
-      <input type="password" id="password" placeholder="Password" style="
-        background-color: #1e1e2f;
-        color: #fff;
-        border: 1px solid #444;
-        margin-bottom: 20px;
-        padding: 12px;
-        width: 100%;
-        border-radius: 6px;
-      " />
-      <button onclick="login()" style="
-        padding: 12px;
-        width: 100%;
-        background-color: #00d1b2;
-        color: #1e1e2f;
-        border: none;
-        border-radius: 6px;
-        font-weight: bold;
-        font-size: 16px;
-        cursor: pointer;
-      ">Login</button>
-      <p id="loginError" style="color: #ff6666; margin-top: 15px; display: none;">Invalid username or password</p>
-    </div>
+    <h2>Login to USDT Pool</h2>
+    <input type="text" id="username" placeholder="Username" autocomplete="off" />
+    <input type="password" id="password" placeholder="Password" />
+    <button id="loginButton">Login</button>
+    <div id="loginError">Incorrect username or password!</div>
   </div>
 
-  <!-- Dashboard -->
-  <div id="dashboard">
+  <div id="mainContent">
     <div class="sidebar">
       <h2>USDT Pool</h2>
       <a href="#">Dashboard</a>
@@ -143,8 +153,7 @@
       <a href="#">Withdraw</a>
       <a href="#">Settings</a>
     </div>
-
-    <div class="main">
+    <div style="margin-left: 220px; padding: 20px;">
       <div style="text-align: center; margin-bottom: 10px;">
         <img src="USDT_logo.png" alt="USDT Logo" style="width: 80px;" />
       </div>
@@ -203,17 +212,7 @@
   </div>
 
   <script>
-    function login() {
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-      if (username === "DexDeveloper" && password === "ai654321") {
-        document.getElementById("loginContainer").style.display = "none";
-        document.getElementById("dashboard").style.display = "flex";
-      } else {
-        document.getElementById("loginError").style.display = "block";
-      }
-    }
-
+    // Show content tabs
     function showTab(id) {
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
@@ -221,32 +220,58 @@
       event.target.classList.add('active');
     }
 
-    window.onload = function() {
-      const ctx = document.getElementById('liquidityChart');
-      if (ctx) {
-        new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
-            datasets: [{
-              label: 'Liquidity (USDT)',
-              data: [12000, 11950, 12030, 11980, 12000],
-              backgroundColor: 'rgba(0, 209, 178, 0.2)',
-              borderColor: '#00d1b2',
-              borderWidth: 2,
-              tension: 0.3,
-              fill: true
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: false
-              }
+    // Hardcoded username and password
+    const validUsername = "DexDeveloper";
+    const validPassword = "ai654321";
+
+    // Login function
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const errorDiv = document.getElementById('loginError');
+
+      if(username === validUsername && password === validPassword) {
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'flex';
+        errorDiv.style.display = 'none';
+      } else {
+        errorDiv.style.display = 'block';
+      }
+    }
+
+    // Attach login function to button and Enter key
+    document.getElementById('loginButton').addEventListener('click', login);
+    document.addEventListener('keydown', function(event) {
+      if(event.key === 'Enter') {
+        login();
+      }
+    });
+
+    // Initialize chart if canvas exists
+    const ctx = document.getElementById('liquidityChart');
+    if (ctx) {
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
+          datasets: [{
+            label: 'Liquidity (USDT)',
+            data: [12000, 11950, 12030, 11980, 12000],
+            backgroundColor: 'rgba(0, 209, 178, 0.2)',
+            borderColor: '#00d1b2',
+            borderWidth: 2,
+            tension: 0.3,
+            fill: true
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: false
             }
           }
-        });
-      }
+        }
+      });
     }
   </script>
 </body>
