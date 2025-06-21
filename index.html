@@ -136,14 +136,14 @@
     <div class="sidebar">
       <h2>USDT Pool</h2>
       <a href="#">Dashboard</a>
+      <a href="https://pancakeswap.finance/" target="_blank">PancakeSwap</a>
       <a href="#">Liquidity</a>
       <a href="#">Swap</a>
       <a href="#">Analytics</a>
       <a href="#">Deposit</a>
       <a href="#">Withdraw</a>
       <a href="#">Settings</a>
-      <a href="#" onclick="logout()">Logout</a>
-      <a href="#">PancakeSwap</a>
+      <a href="#" onclick="logout(event)">Logout</a>
     </div>
 
     <div class="main">
@@ -223,6 +223,15 @@
       event.target.classList.add('active');
     }
 
+    function logout(event) {
+      if (event) event.preventDefault();
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("loginContainer").style.display = "flex";
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+      document.getElementById("loginError").style.display = "none";
+    }
+
     window.onload = function() {
       const ctx = document.getElementById('liquidityChart');
       if (ctx) {
@@ -250,7 +259,6 @@
         });
       }
 
-      // Add event listener for Enter key on login inputs
       document.getElementById("username").addEventListener("keydown", function(e) {
         if (e.key === "Enter") login();
       });
